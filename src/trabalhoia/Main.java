@@ -28,9 +28,10 @@ public class Main {
                 return (pow(x, 3.0) * -1.0) + 5.0 * pow(x, 2.0) + 2.0;
             }
         };
-        Problem problemaFuncaoQuadrada = new Problem(funcaoQuadrada, -15.0, -20.0, -10.0, 0.1);
+        Problem problemaFuncaoQuadrada = new Problem(funcaoQuadrada, -14.35, -50.0, 0.0, 0.1);
         HillClimbingSearch search = new HillClimbingSearch(problemaFuncaoQuadrada);
-        System.out.println("O máximo da função f(x) = -x³ + 5x² + 2 é: " + search.getLocalMax());
+        search.getLocalMax();
+        search.getLocalMin();
     }
 
 }

@@ -20,8 +20,8 @@ public class MinValueGoalTest extends GoalTest {
         if (parent != null) {
             double oldValue = parent.getState().getValue();
             double newValue = node.getState().getValue();
-            if (newValue > oldValue) {
-                return Math.abs(newValue - oldValue) < maxError;
+            if (newValue < oldValue) {
+                return Math.abs(newValue - oldValue) < maxError || node.getxVariance() == 0;
             }
         }
         return false;

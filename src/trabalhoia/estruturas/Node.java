@@ -73,7 +73,6 @@ public class Node {
 
     @Override
     public String toString() {
-        return "[parent=" + parent + ", state="
-                + getState() + "]";
+        return "[x: " + state.getX() + ", value: " + state.getValue() + ", xVariance: " + xVariance + "]";
     }
 }

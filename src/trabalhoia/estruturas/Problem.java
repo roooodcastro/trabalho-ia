@@ -58,4 +58,9 @@ public class Problem {
     public void setFunction(Function function) {
         this.function = function;
     }
+
+    @Override
+    public String toString() {
+        return "Initial X: " + initialState.getX() + ", interval: [" + minInterval + ", " + maxInterval + "], tolerance: " + maxError;
+    }
 }
