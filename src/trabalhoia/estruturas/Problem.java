@@ -1,150 +1,61 @@
 package trabalhoia.estruturas;
 
-/**
- * Artificial Intelligence A Modern Approach (3rd Edition): page 66.<br>
- * <br>
- * A problem can be defined formally by five components: <br>
- * <ul>
- * <li>The <b>initial state</b> that the agent starts in.</li>
- * <li>A description of the possible <b>actions</b> available to the agent.
- * Given a particular state s, ACTIONS(s) returns the set of actions that can be
- * executed in s.</li>
- * <li>A description of what each action does; the formal name for this is the
- * <b>transition model, specified by a function RESULT(s, a) that returns the
- * state that results from doing action a in state s.</b></li>
- * <li>The <b>goal test</b>, which determines whether a given state is a goal
- * state.</li>
- * <li>A <b>path cost</b> function that assigns a numeric cost to each path. The
- * problem-solving agent chooses a cost function that reflects its own
- * performance measure. The <b>step cost</b> of taking action a in state s to
- * reach state s' is denoted by c(s,a,s')</li>
- * </ul>
- *
- * @author Ravi Mohan
- * @author Ciaran O'Reilly
- * @author Mike Stampone
- */
 public class Problem {
 
-        protected Object initialState;
+    private State initialState;
+    private Function function;
+    private double minInterval = 0;
+    private double maxInterval = 0;
+    private double maxError;
 
-        protected ActionsFunction actionsFunction;
+    public Problem(Function function, double initialValue, double minInterval, double maxInterval, double maxError) {
+        this.initialState = new State(function, initialValue);
+        this.minInterval = minInterval;
+        this.maxInterval = maxInterval;
+        this.maxError = maxError;
+        this.function = function;
+    }
 
-        protected ResultFunction resultFunction;
+    protected Problem() {
+    }
 
-        protected GoalTest goalTest;
+    public State getInitialState() {
+        return initialState;
+    }
 
-        protected StepCostFunction stepCostFunction;
+    public void setInitialState(State initialState) {
+        this.initialState = initialState;
+    }
 
-        /**
-         * Constructs a problem with the specified components, and a default step
-         * cost function (i.e. 1 per step).
-         *
-         * @param initialState
-         *            the initial state that the agent starts in.
-         * @param actionsFunction
-         *            a description of the possible actions available to the agent.
-         * @param resultFunction
-         *            a description of what each action does; the formal name for
-         *            this is the transition model, specified by a function
-         *            RESULT(s, a) that returns the state that results from doing
-         *            action a in state s.
-         * @param goalTest
-         *            test determines whether a given state is a goal state.
-         */
-        public Problem(Object initialState, ActionsFunction actionsFunction,
-                        ResultFunction resultFunction, GoalTest goalTest) {
-                this(initialState, actionsFunction, resultFunction, goalTest,
-                                new DefaultStepCostFunction());
-        }
+    public double getMaxError() {
+        return maxError;
+    }
 
-        /**
-         * Constructs a problem with the specified components, which includes a step
-         * cost function.
-         *
-         * @param initialState
-         *            the initial state of the agent.
-         * @param actionsFunction
-         *            a description of the possible actions available to the agent.
-         * @param resultFunction
-         *            a description of what each action does; the formal name for
-         *            this is the transition model, specified by a function
-         *            RESULT(s, a) that returns the state that results from doing
-         *            action a in state s.
-         * @param goalTest
-         *            test determines whether a given state is a goal state.
-         * @param stepCostFunction
-         *            a path cost function that assigns a numeric cost to each path.
-         *            The problem-solving-agent chooses a cost function that
-         *            reflects its own performance measure.
-         */
-        public Problem(Object initialState, ActionsFunction actionsFunction,
-                        ResultFunction resultFunction, GoalTest goalTest,
-                        StepCostFunction stepCostFunction) {
-                this.initialState = initialState;
-                this.actionsFunction = actionsFunction;
-                this.resultFunction = resultFunction;
-                this.goalTest = goalTest;
-                this.stepCostFunction = stepCostFunction;
-        }
+    public void setMaxError(double maxError) {
+        this.maxError = maxError;
+    }
 
-        /**
-         * Returns the initial state of the agent.
-         *
-         * @return the initial state of the agent.
-         */
-        public Object getInitialState() {
-                return initialState;
-        }
+    public double getMaxInterval() {
+        return maxInterval;
+    }
 
-        /**
-         * Returns <code>true</code> if the given state is a goal state.
-         *
-         * @return <code>true</code> if the given state is a goal state.
-         */
-        public boolean isGoalState(Object state) {
-                return goalTest.isGoalState(state);
-        }
+    public void setMaxInterval(double maxInterval) {
+        this.maxInterval = maxInterval;
+    }
 
-        /**
-         * Returns the goal test.
-         *
-         * @return the goal test.
-         */
-        public GoalTest getGoalTest() {
-                return goalTest;
-        }
+    public double getMinInterval() {
+        return minInterval;
+    }
 
-        /**
-         * Returns the description of the possible actions available to the agent.
-         *
-         * @return the description of the possible actions available to the agent.
-         */
-        public ActionsFunction getActionsFunction() {
-                return actionsFunction;
-        }
+    public void setMinInterval(double minInterval) {
+        this.minInterval = minInterval;
+    }
 
-        /**
-         * Returns the description of what each action does.
-         *
-         * @return the description of what each action does.
-         */
-        public ResultFunction getResultFunction() {
-                return resultFunction;
-        }
+    public Function getFunction() {
+        return function;
+    }
 
-        /**
-         * Returns the path cost function.
-         *
-         * @return the path cost function.
-         */
-        public StepCostFunction getStepCostFunction() {
-                return stepCostFunction;
-        }
-
-        //
-        // PROTECTED METHODS
-        //
-        protected Problem() {
-        }
+    public void setFunction(Function function) {
+        this.function = function;
+    }
 }
