@@ -1,34 +1,20 @@
 package trabalhoia.algoritmos;
 
 import java.util.List;
-import trabalhoia.estruturas.GoalTest;
 import trabalhoia.estruturas.MaxValueGoalTest;
 import trabalhoia.estruturas.MinValueGoalTest;
 import trabalhoia.estruturas.Node;
 import trabalhoia.estruturas.Problem;
-import trabalhoia.estruturas.State;
+import trabalhoia.estruturas.Search;
 
-public class HillClimbingSearch {
-
-    public enum SearchOutcome {
-
-        FAILURE, SOLUTION_FOUND
-    };
-
-    public enum SearchType {
-
-        LOCAL_MIN, LOCAL_MAX
-    };
-    private Problem problem = null;
-    private SearchOutcome outcome = null;
-    private State lastState = null;
-    private GoalTest goalTest;
+public class HillClimbingSearch extends Search {
 
     public HillClimbingSearch(Problem problem) {
-        this.problem = problem;
+        super(problem);
     }
 
-    public SearchOutcome search(SearchType type) throws Exception {
+    @Override
+    public SearchOutcome search(SearchType type) {
         System.out.println("Parâmetros: " + problem.toString() + "\n");
         outcome = null;
         lastState = null;
@@ -49,18 +35,6 @@ public class HillClimbingSearch {
             current = neighbour;
         }
         return outcome;
-    }
-
-    public SearchOutcome getOutcome() {
-        return outcome;
-    }
-
-    public Object getLastSearchState() {
-        return lastState;
-    }
-
-    private boolean isStateValid(State state) {
-        return state.getX() >= problem.getMinInterval() && state.getX() <= problem.getMaxInterval();
     }
 
     private Node getBestValuedNodeFrom(List<Node> children, SearchType type) {
@@ -101,6 +75,7 @@ public class HillClimbingSearch {
         }
     }
 
+    @Override
     public double getLocalMin() {
         try {
             System.out.println("Iniciando busca de um mínimo local utilizando o método de subida de encosta");
@@ -115,6 +90,7 @@ public class HillClimbingSearch {
         return Double.POSITIVE_INFINITY;
     }
 
+    @Override
     public double getLocalMax() {
         try {
             System.out.println("Iniciando busca de um máximo local utilizando o método de subida de encosta");
