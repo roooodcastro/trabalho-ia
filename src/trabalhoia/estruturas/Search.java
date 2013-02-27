@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package trabalhoia.estruturas;
 
 /**
@@ -24,6 +23,7 @@ public abstract class Search {
     protected SearchOutcome outcome = null;
     protected State lastState = null;
     protected GoalTest goalTest;
+    protected boolean printLog = true;
 
     public Search(Problem problem) {
         this.problem = problem;
@@ -44,5 +44,19 @@ public abstract class Search {
     }
 
     public abstract double getLocalMin();
+
     public abstract double getLocalMax();
+
+    public void log(String log) {
+        if (printLog)
+            System.out.println(log);
+    }
+
+    public boolean isPrintLog() {
+        return printLog;
+    }
+
+    public void setPrintLog(boolean printLog) {
+        this.printLog = printLog;
+    }
 }

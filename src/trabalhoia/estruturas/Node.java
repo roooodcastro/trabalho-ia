@@ -2,6 +2,7 @@ package trabalhoia.estruturas;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Node {
 
@@ -44,18 +45,23 @@ public class Node {
     }
 
     public List<Node> expandNode() {
-        double firstValue = xVariance / 2;
-        double secondValue = xVariance / 1;
-        double thirdValue = xVariance * 2;
+        double[] nextValues = new double[]{xVariance * 0.2, xVariance, xVariance * 5, xVariance * -0.2, -xVariance, xVariance * -5};
+        double[] scrambledNextValues = new double[6];
+        boolean[] checked = new boolean[]{false, false, false, false, false, false};
+        int i = 0;
+        while (i < 6) {
+            int index = new Random().nextInt(6);
+            if (checked[index] == false) {
+                checked[index] = true;
+                scrambledNextValues[index] = nextValues[i++];
+            }
+        }
         List<Node> children = new ArrayList<Node>();
         Function f = getState().getFunction();
         double x = getState().getX();
-        children.add(new Node(new State(f, x + firstValue), this, firstValue));
-        children.add(new Node(new State(f, x - firstValue), this, -firstValue));
-        children.add(new Node(new State(f, x + secondValue), this, secondValue));
-        children.add(new Node(new State(f, x - secondValue), this, -secondValue));
-        children.add(new Node(new State(f, x + thirdValue), this, thirdValue));
-        children.add(new Node(new State(f, x - thirdValue), this, -thirdValue));
+        for (i = 0; i < 6; i++) {
+            children.add(new Node(new State(f, x + scrambledNextValues[i]), this, scrambledNextValues[i]));
+        }
         return children;
     }
 

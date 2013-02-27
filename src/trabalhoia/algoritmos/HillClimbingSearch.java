@@ -15,7 +15,7 @@ public class HillClimbingSearch extends Search {
 
     @Override
     public SearchOutcome search(SearchType type) {
-        System.out.println("Parâmetros: " + problem.toString() + "\n");
+        log("Parâmetros: " + problem.toString());
         outcome = null;
         lastState = null;
         double interval = problem.getMaxInterval() - problem.getMinInterval();
@@ -23,45 +23,37 @@ public class HillClimbingSearch extends Search {
         Node neighbour = null;
         while (outcome == null) {
             List<Node> children = current.expandNode();
-            neighbour = getBestValuedNodeFrom(children, type);
-            System.out.println("Achado nó melhor: " + neighbour.toString());
+            neighbour = getNextBestValuedNodeFrom(children, type, current);
             if ((neighbour == null) || !isNodeBetter(neighbour, current, type)) {
                 if (goalTest.isGoal(current)) {
                     outcome = SearchOutcome.SOLUTION_FOUND;
+                } else {
+                    outcome = SearchOutcome.FAILURE;
+                    return outcome;
                 }
                 lastState = current.getState();
-//                return SearchUtils.actionsFromNodes(current.getPathFromRoot());
+            } else {
+                log("Achado nó melhor: " + neighbour.toString());
             }
             current = neighbour;
         }
         return outcome;
     }
 
-    private Node getBestValuedNodeFrom(List<Node> children, SearchType type) {
-        double betterValue;
-        if (type == SearchType.LOCAL_MAX) {
-            betterValue = Double.NEGATIVE_INFINITY;
-        }
-        else {
-            betterValue = Double.POSITIVE_INFINITY;
-        }
-        Node nodeWithBetterValue = null;
+    private Node getNextBestValuedNodeFrom(List<Node> children, SearchType type, Node current) {
         for (Node child : children) {
             double value = child.getState().getValue();
             if (type == SearchType.LOCAL_MAX) {
-                if (value > betterValue && isStateValid(child.getState())) {
-                    betterValue = value;
-                    nodeWithBetterValue = child;
+                if (value > current.getState().getValue() && isStateValid(child.getState())) {
+                    return child;
                 }
-            }
-            else {
-                if (value < betterValue && isStateValid(child.getState())) {
-                    betterValue = value;
-                    nodeWithBetterValue = child;
+            } else {
+                if (value < current.getState().getValue() && isStateValid(child.getState())) {
+                    return child;
                 }
             }
         }
-        return nodeWithBetterValue;
+        return null;
     }
 
     private boolean isNodeBetter(Node current, Node neighbour, SearchType type) {
@@ -69,8 +61,7 @@ public class HillClimbingSearch extends Search {
         double neighbourValue = neighbour.getState().getValue();
         if (type == SearchType.LOCAL_MAX) {
             return (currentValue > neighbourValue);
-        }
-        else {
+        } else {
             return (currentValue < neighbourValue);
         }
     }
@@ -82,8 +73,10 @@ public class HillClimbingSearch extends Search {
             goalTest = new MinValueGoalTest(problem.getMaxError());
             search(SearchType.LOCAL_MIN);
             if (outcome == SearchOutcome.SOLUTION_FOUND) {
-                System.out.println("Mínimo local da função encontrado: " + lastState.getValue() + "\n\n");
+                System.out.println("Mínimo local da função encontrado: " + lastState.getValue() + "\n");
                 return lastState.getValue();
+            } else {
+                System.out.println("Não foi possível encontrar um mínimo local para a função\n");
             }
         } catch (Exception ex) {
         }
@@ -97,8 +90,10 @@ public class HillClimbingSearch extends Search {
             goalTest = new MaxValueGoalTest(problem.getMaxError());
             search(SearchType.LOCAL_MAX);
             if (outcome == SearchOutcome.SOLUTION_FOUND) {
-                System.out.println("Máximo local da função encontrado: " + lastState.getValue() + "\n\n");
+                System.out.println("Máximo local da função encontrado: " + lastState.getValue() + "\n");
                 return lastState.getValue();
+            } else {
+                System.out.println("Não foi possível encontrar um máximo local para a função\n");
             }
         } catch (Exception ex) {
         }
