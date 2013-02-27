@@ -3,17 +3,11 @@ package trabalhoia.algoritmos;
 import java.util.List;
 import java.util.Random;
 import trabalhoia.estruturas.AnnealingGoalTest;
-import trabalhoia.estruturas.MaxValueGoalTest;
-import trabalhoia.estruturas.MinValueGoalTest;
 import trabalhoia.estruturas.Node;
 import trabalhoia.estruturas.Problem;
 import trabalhoia.estruturas.Scheduler;
 import trabalhoia.estruturas.Search;
 
-/**
- *
- * @author rodrigo
- */
 public class SimulatedAnnealingSearch extends Search {
 
     private Scheduler scheduler;

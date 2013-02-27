@@ -1,9 +1,5 @@
 package trabalhoia.estruturas;
 
-/**
- * @author rodrigo
- *
- */
 public class Scheduler {
 
     private final int k, limit;

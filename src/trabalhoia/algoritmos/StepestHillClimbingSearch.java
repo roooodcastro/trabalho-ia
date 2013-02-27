@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package trabalhoia.algoritmos;
 
 import java.util.List;
@@ -11,10 +7,6 @@ import trabalhoia.estruturas.Node;
 import trabalhoia.estruturas.Problem;
 import trabalhoia.estruturas.Search;
 
-/**
- *
- * @author rodrigo
- */
 public class StepestHillClimbingSearch extends Search {
 
     public StepestHillClimbingSearch(Problem problem) {

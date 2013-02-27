@@ -1,13 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package trabalhoia.estruturas;
 
-/**
- *
- * @author rodrigo
- */
 public abstract class GoalTest {
 
     protected double maxError;

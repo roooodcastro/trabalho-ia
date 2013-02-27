@@ -13,21 +13,15 @@ import trabalhoia.estruturas.Problem;
 import static java.lang.Math.*;
 
 
-/**
- *
- * @author rodrigo
- */
 public class Main {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         // Setar para true para os algoritmos imprimirem cada passo de sua execução
         boolean printStepLogs = false;
 
-        // Exemplo de criação de uma função
-        Function funcaoQuadrada = new Function() {
+        // Exemplo de criação de uma função. Para criar uma nova função, basta implementar o método value,
+        // que recebe um valor X como entrada e retorna o resultado da função, o f(x).
+        Function funcaoCubica = new Function() {
 
             @Override
             public double value(double x) {
@@ -40,18 +34,20 @@ public class Main {
         // e por último o valor de tolerância, ou seja, e quão baixa tem que ser a subida ou
         // mudança de energia para que seja considerada que o problema chegou ao final, após
         // esgotar-se todos os caminhos possíveis
-        Problem problemaFuncaoQuadrada = new Problem(funcaoQuadrada, -14.35, -50.0, 0.0, 0.5);
+        Problem problemaFuncaoCubica = new Problem(funcaoCubica, -14.35, -50.0, 0.0, 0.5);
 
         // Inicialização de cada algoritmo para o problema dado como exemplo
-        HillClimbingSearch hillClimbingSearch = new HillClimbingSearch(problemaFuncaoQuadrada);
-        StepestHillClimbingSearch stepestHillClimbingSearch = new StepestHillClimbingSearch(problemaFuncaoQuadrada);
-        SimulatedAnnealingSearch simulatedAnnealingSearch = new SimulatedAnnealingSearch(problemaFuncaoQuadrada);
+        HillClimbingSearch hillClimbingSearch = new HillClimbingSearch(problemaFuncaoCubica);
+        StepestHillClimbingSearch stepestHillClimbingSearch = new StepestHillClimbingSearch(problemaFuncaoCubica);
+        SimulatedAnnealingSearch simulatedAnnealingSearch = new SimulatedAnnealingSearch(problemaFuncaoCubica);
 
         // Configurando os algoritmos para imprimirem ou não os passos
         hillClimbingSearch.setPrintLog(printStepLogs);
         stepestHillClimbingSearch.setPrintLog(printStepLogs);
         simulatedAnnealingSearch.setPrintLog(printStepLogs);
 
+
+        
         // Pegando os máximos locais de cada algoritmo
         hillClimbingSearch.getLocalMax();
         stepestHillClimbingSearch.getLocalMax();
@@ -62,5 +58,4 @@ public class Main {
         stepestHillClimbingSearch.getLocalMin();
         simulatedAnnealingSearch.getLocalMin();
     }
-
 }
