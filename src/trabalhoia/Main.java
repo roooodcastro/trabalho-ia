@@ -34,7 +34,7 @@ public class Main {
         // e por último o valor de tolerância, ou seja, e quão baixa tem que ser a subida ou
         // mudança de energia para que seja considerada que o problema chegou ao final, após
         // esgotar-se todos os caminhos possíveis
-        Problem problemaFuncaoCubica = new Problem(funcaoCubica, -14.35, -50.0, 0.0, 0.5);
+        Problem problemaFuncaoCubica = new Problem(funcaoCubica, -14.35, -50.0, 0.0, 0.01);
 
         // Inicialização de cada algoritmo para o problema dado como exemplo
         HillClimbingSearch hillClimbingSearch = new HillClimbingSearch(problemaFuncaoCubica);

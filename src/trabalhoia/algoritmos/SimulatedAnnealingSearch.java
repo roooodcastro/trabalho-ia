@@ -47,7 +47,7 @@ public class SimulatedAnnealingSearch extends Search {
                         deltaE = current.getState().getValue() - next.getState().getValue();
                     if (shouldAccept(temperature, deltaE) && isStateValid(next.getState())) {
                         current = next;
-                        log("Achado um novo nó: " + next.toString());
+                        log("Achado um novo nó: " + next.toString() + ", temp: " + temperature);
                     }
                 }
             }

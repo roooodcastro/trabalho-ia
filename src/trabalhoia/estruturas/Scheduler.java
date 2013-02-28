@@ -1,5 +1,9 @@
 package trabalhoia.estruturas;
 
+/**
+ * @author rodrigo
+ *
+ */
 public class Scheduler {
 
     private final int k, limit;
@@ -13,8 +17,8 @@ public class Scheduler {
 
     public Scheduler() {
         this.k = 20;
-        this.lam = 0.45;
-        this.limit = 100;
+        this.lam = 0.1;
+        this.limit = 500;
     }
 
     public double getTemp(int t) {

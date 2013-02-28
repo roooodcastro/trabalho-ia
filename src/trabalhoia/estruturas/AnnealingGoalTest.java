@@ -14,5 +14,4 @@ public class AnnealingGoalTest extends GoalTest {
     public boolean isAnnealingGoal(double deltaE) {
         return deltaE < maxError;
     }
-
 }

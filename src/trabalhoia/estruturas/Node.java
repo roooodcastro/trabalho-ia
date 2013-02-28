@@ -46,11 +46,11 @@ public class Node {
 
     public List<Node> expandNode() {
         double[] nextValues = new double[]{xVariance * 0.2, xVariance, xVariance * 5, xVariance * -0.2, -xVariance, xVariance * -5};
-        double[] scrambledNextValues = new double[6];
+        double[] scrambledNextValues = new double[nextValues.length];
         boolean[] checked = new boolean[]{false, false, false, false, false, false};
         int i = 0;
-        while (i < 6) {
-            int index = new Random().nextInt(6);
+        while (i < nextValues.length) {
+            int index = new Random().nextInt(nextValues.length);
             if (checked[index] == false) {
                 checked[index] = true;
                 scrambledNextValues[index] = nextValues[i++];
